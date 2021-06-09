@@ -157,7 +157,7 @@ To deploy web app API, we use the App Engine service from Google Cloud Platform 
 Which then we received the main url for the deployed API in the App Engine : <br>
 https://batikrecog-b21-cap0068.et.r.appspot.com/ <br>
 
-<img src="https://prnt.sc/14uvvqt"> > <br>
+<img src="https://cdn.discordapp.com/attachments/834812570434535494/852108725040447518/unknown.png"> > <br>
 
 ### Files Uploaded to the App Engine
 The files that is uploaded to the App Engine includes : <br>
