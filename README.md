@@ -1,4 +1,4 @@
-# thecoolture_bda
+# CAP0068-bda-thecoolture
 Repository for Batik Detection App by The Coolture Team, made for Bangkit 2021 Capstone Project.
 
 Contributors for this application's development:
