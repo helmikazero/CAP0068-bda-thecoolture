@@ -20,7 +20,7 @@ This [dataset](https://drive.google.com/file/d/1uFnhO8WXdnyTBxGFy1qlqWU4iPmEF0kH
 4. Mix
 4. Nitik
 5. Parang
-![Batik](img/batik.png)
+![Batik](machine_learning/img/batik.png)
 
 ### Requirements
 For this project we don't use a desktop computer, but use Google Colab instead.
@@ -67,7 +67,7 @@ We use [ResNet-50v2](https://keras.io/api/applications/resnet/#resnet50v2-functi
 ### The Result
 The best results we got were the following:
 
-![Model Result](img/result.png)
+![Model Result](machine_learning/img/result.png)
 
 We got $73.6\%$ for the accuracy and $50\%$ for the validation accuracy.
 
