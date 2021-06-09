@@ -82,10 +82,10 @@ So, in order to solve this problem. We included quote cleaning function provided
 
 And so after those post-processing we can input the clean base64 bytes to the decoder.<br>
 
-#### 3. Methodes of Sending the Image to the API in the Cloud
+#### 3. Methods of Sending the Image to the API in the Cloud
 Sending the whole raw file of image that is in the form of jpeg or png is not possible through the REST API (as far as we know). <br>
 
-There are several methodes that is available in the table for the team : <br>
+There are several methods that is available in the table for the team : <br>
 1. Breaking down the image into cv2 image format from the Android and sending it to the cloud.
 2. Encoding the image into base64 bytes format and sending it to the cloud. <br>
 
