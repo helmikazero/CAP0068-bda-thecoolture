@@ -128,25 +128,23 @@ Therefore you'll have to evaluate the exported TFLite model and compare its accu
 ---
 
 ## Android Deployment
-You can try to download the HandSign application which are provided in this collaboratory in android studio. We simply following [this tutorial](https://codelabs.developers.google.com/tflite-object-detection-android) for our android deployment.<br>
-You can use the **model.tflite** that you get from previous training and save it in the assets folder.<br>
+To try our Android application, you can download the release version APK file or the Android Studio project files in this repository.<br>
 
 ### Step 1. UI/UX
-First before making the application, we create flow, user experience and user interface for the app. We make it using Figma, because its free and provide colaboration feature, so the other members can edit and see the changes. Here is the link : https://www.figma.com/file/x8X7DC8O0qwDcdJQ5ht76w/Sign-Language-Translator?node-id=0%3A1
+Before making the application, we made a mockup for the application's design guideline. The mockup was made on Adobe XD.
 
 ### Step 2. Creating Layout
-The next is to implement our UI/UX to the real thing, by making the layout of the application in android studio. Because of the slide bar menu in our application, we use the slide bar menu activity template from android studio and modify it as we need. After finishing the three menu that consist of Home, Settings and Information, next is to make the activity for each feature. Since we only got 1 month to finish this project, we mainly focus on Sign language translator feature meanwhile the other feature is display as "Under Development" for future improvement. 
+The next step is making the layout of the app. We simply used Android Studio's activity that has navigation drawer interface because we intended the app to be designed according to the Material Design language guidelines. The only difference is the color palette and the icon that is unique to our app.
 
 ### Step 3. Coding the App
-For this step before start to coding the sign language translator feature, we make sure the other feature works first, making Intent for every button and directing it to the correct activity or fragment. Then we start to coding sign language translator feature by preparing the input for the app. This app can take picture with the android camera or take it from the android galery folder. The choosen picture than displayed on the application screen so that can be analyzed by the model then outputing the result.
+In this step, firtly we made sure that all the backend works as intended. We made the connection between the server in Google Cloud and the Android app using [retrofit2](https://square.github.io/retrofit/) for the pattern recognition, and then created a [Room](https://developer.android.com/jetpack/androidx/releases/room) database for storing the scans history on the local device. We tested the backend's functionality using logcat, and after all backend part is working flawlessly we go through designing the frontend side such as the layout with RecyclerView etc.
 
-Since we follow the tutorial from the official documentation, this object detection step mostly similar to that. We make a function to make the bounding box for showing the translator result and anothe function to return the image to be displayed in the application, then a function to call the tflite model with the input is Bitmap of the image that alread be converted before. 
-
-Here is the some images of how our application looks like.<br>
-<img src="https://storage.googleapis.com/sign_language_dataset2/Documentation/Doc5.png">
-
-And here is the mAP (Mean Average Precision) on each characters:<br>
-<img src="https://storage.googleapis.com/sign_language_dataset2/Documentation/Doc6.png">
+Here are some screenshots of our app:<br>
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091042739912754/Screenshot_20210609-144353_Batik_Detection_App.png" width="180" height="320">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091042975055882/Screenshot_20210609-144358_Batik_Detection_App.png" width="180" height="320">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043317809172/Screenshot_20210609-144434_Batik_Detection_App.png" width="180" height="320">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043611672586/Screenshot_20210609-144442_Batik_Detection_App.png" width="180" height="320">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043817848842/Screenshot_20210609-144453_Batik_Detection_App.png" width="180" height="320">
 
 ---
 
