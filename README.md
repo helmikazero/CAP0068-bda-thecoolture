@@ -140,11 +140,11 @@ The next step is making the layout of the app. We simply used Android Studio's a
 In this step, firtly we made sure that all the backend works as intended. We made the connection between the server in Google Cloud and the Android app using [retrofit2](https://square.github.io/retrofit/) for the pattern recognition, and then created a [Room](https://developer.android.com/jetpack/androidx/releases/room) database for storing the scans history on the local device. We tested the backend's functionality using logcat, and after all backend part is working flawlessly we go through designing the frontend side such as the layout with RecyclerView etc.
 
 Here are some screenshots of our app:<br>
-<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091042739912754/Screenshot_20210609-144353_Batik_Detection_App.png">
-<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091042975055882/Screenshot_20210609-144358_Batik_Detection_App.png">
-<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043317809172/Screenshot_20210609-144434_Batik_Detection_App.png">
-<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043611672586/Screenshot_20210609-144442_Batik_Detection_App.png">
-<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043817848842/Screenshot_20210609-144453_Batik_Detection_App.png">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091042739912754/Screenshot_20210609-144353_Batik_Detection_App.png" width="180" height="320">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091042975055882/Screenshot_20210609-144358_Batik_Detection_App.png" width="180" height="320">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043317809172/Screenshot_20210609-144434_Batik_Detection_App.png" width="180" height="320">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043611672586/Screenshot_20210609-144442_Batik_Detection_App.png" width="180" height="320">
+<img src="https://cdn.discordapp.com/attachments/504314525873471509/852091043817848842/Screenshot_20210609-144453_Batik_Detection_App.png" width="180" height="320">
 
 ---
 
