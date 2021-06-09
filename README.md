@@ -149,27 +149,60 @@ Here are some screenshots of our app:<br>
 ---
 
 ## Cloud Deployment
-You can try to download the HandSign application which are provided in this collaboratory in android studio. We simply following [this tutorial](https://codelabs.developers.google.com/tflite-object-detection-android) for our android deployment.<br>
-You can use the **model.tflite** that you get from previous training and save it in the assets folder.<br>
-
 We are using FLASK for the web framework since it the language used for FLASK is Python which the cloud developers in the team is already fond of.<br>
 To deploy web app API, we use the App Engine service from Google Cloud Platform so that the android.<br>
 
+Which then we received the main url for the deployed API in the App Engine : <br>
+https://batikrecog-b21-cap0068.et.r.appspot.com/ <br>
+
+<img src="https://cdn.discordapp.com/attachments/834812570434535494/852108725040447518/unknown.png"> > <br>
+
 ### Files Uploaded to the App Engine
-The files that is uploaded to the App Engine includes : 
+The files that is uploaded to the App Engine includes : <br>
+* app.yml - a file that is required by App Engine to be included that consist of the runtime that is used which here we are using Python 3.8
+* batik_dropout.h5 - the model that is given by the Machine Learning devs
+* batikrecog-84-firebase-adminsdk-jbbex-c097ae4770.json - the authorization key required by the Firebase to access the Firebase
+* main.py - the main python file that consists all the API scripts that includes the REST API routes, keras model load, and openCV image processing.
+* requirements.txt - also a file required by App Engine that lists all the python library dependencies for the API
 
-### Step 2. Creating Layout
-The next is to implement our UI/UX to the real thing, by making the layout of the application in android studio. Because of the slide bar menu in our application, we use the slide bar menu activity template from android studio and modify it as we need. After finishing the three menu that consist of Home, Settings and Information, next is to make the activity for each feature. Since we only got 1 month to finish this project, we mainly focus on Sign language translator feature meanwhile the other feature is display as "Under Development" for future improvement. 
+### Steps On Deploying the API to App Engine
+1. Uploading all of the files to Cloud Shell in GCP
+2. Create App in App Engine
+3. Deploy the files in the Cloud Shell to GCP App Engine with `gcloud app deploy --no-cache` command with the `--no-cache` part for ensuring of not using the previous cached library if exist.
 
-### Step 3. Coding the App
-For this step before start to coding the sign language translator feature, we make sure the other feature works first, making Intent for every button and directing it to the correct activity or fragment. Then we start to coding sign language translator feature by preparing the input for the app. This app can take picture with the android camera or take it from the android galery folder. The choosen picture than displayed on the application screen so that can be analyzed by the model then outputing the result.
+### Routes Available in the API
+There are severals routes that is provided in the API for different purposes : <br>
+* `/predict/pcpy` - Meant for receiving POST request from python file that behaves similar to request from Android that sends image and expecting prediciton response
+* `/predict/full` - The main route meant for the Android Batik Recognition APP which includes the process of cleaning the received data from android that is quoted.
+* `/predict_b64` - Testing routes for debugging the base64 decode-encode process
+* `/` - route that expects no request and returns "Welcome to the Server" message for checking the deployment straight from the base URL in case the app is not yet deployed.
 
-Since we follow the tutorial from the official documentation, this object detection step mostly similar to that. We make a function to make the bounding box for showing the translator result and anothe function to return the image to be displayed in the application, then a function to call the tflite model with the input is Bitmap of the image that alread be converted before. 
+### Problems Encountered in Development Process
 
-Here is the some images of how our application looks like.<br>
-<img src="https://storage.googleapis.com/sign_language_dataset2/Documentation/Doc5.png">
+#### 1. Massive Size of the Whole Deployment
+With all the libraries and the model. The first version of the deployment can exceeds the size of 2150 MB which exceeds the maximum size of the "F4_1G" which is already the instance class that has the highest deploy size. In order to solve the problem, we change some of the libraries that have "lighter version" such is the tensorflow that have "tensorflow-cpu" version and opencv-python with "headless-opencv-python" version. <br>
 
-And here is the mAP (Mean Average Precision) on each characters:<br>
-<img src="https://storage.googleapis.com/sign_language_dataset2/Documentation/Doc6.png">
+#### 2. Unexpected Quoted Format of the Data Sent by the Android APP
+First version of the API expects in request that in a form of base64 encoded bytes that looks like this (only first 20 letters of the whole encoded data) :
+`b'/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB` <br>
+
+But the received data from the Android looks like this :
+`data=%2F9j%2F4AAQSkZJRgABAQAAAQABAAD%2F2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEB%0AAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH%2` <br>
+
+So, in order to solve this problem. We included quote cleaning function provided by urllib library - `urrlib.unquote()` then remove the first 5 characters which is the `data=`.<br>
+
+And so after those post-processing we can input the clean base64 bytes to the decoder.<br>
+
+#### 3. Methodes of Sending the Image to the API in the Cloud
+Sending the whole raw file of image that is in the form of jpeg or png is not possible through the REST API (as far as we know). <br>
+
+There are several methodes that is available in the table for the team : <br>
+1. Breaking down the image into cv2 image format from the Android and sending it to the cloud.
+2. Encoding the image into base64 bytes format and sending it to the cloud. <br>
+
+We chose NOT to use the first option because the OpenCV module will increase the Android APP size for the Batik App. So, we chose the second option of encoding the image into base64 format before sending it to the cloud. <br>
+
+#### 4. GCP App Engine That Sometimes turned OFF
+As far as we know, the App Engine from GCP has its own mind of turning the deployment OFF if there is no activity for several moments. It causes sudden request from the Android App to trigger the timeout limit due to waiting the App Engine to start everytime it is turned OFF. <br>
 
 ---
